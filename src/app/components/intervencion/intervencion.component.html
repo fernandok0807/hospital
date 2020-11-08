@@ -1,0 +1,82 @@
+
+
+
+
+<div class="contanier">
+    <br>
+  <div class="col-md-6 offset-md-3" id="form1" style="display: block;" >
+    <table class="table table-borderer">
+      <thead>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Telefono</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Consulta</th>
+
+      </thead>
+      <tbody>
+          <tr *ngFor="let color of intervencionService.colors">
+              <td>{{color.nombre}}</td>
+              <td>{{color.apellido}}</td>
+              <td>{{color.telefono}}</td>
+              <td>{{color.fecha}}</td>
+              <td>{{color.hora}}</td>
+          
+
+              <td>
+                  <a (click)="editColor(color)" class="btn btn-outline-success">Iniciar Consulta</a>
+                  
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+    <div class="row" >
+        <div class="offset-md-4 " id="form" style="display: none;" >
+            <h2>Intervención del Paciente</h2>
+            <form #fo="ngForm">
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <input hidden type="text"  class="form-control" #txtclave="ngModel"[(ngModel)]="intervencionService.s.clave"  name="clave" placeholder="clave">
+                </div>
+            </div>
+            
+              
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                      <input hidden type="text"  class="form-control" name="nombre" #txtnombre="ngModel"[(ngModel)]="intervencionService.s.nombre"  placeholder="Nombre">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                      <input type="text"  class="form-control" name="sintomas" #sintomas="ngModel"[(ngModel)]="intervencionService.s.sintomas" placeholder="Sintomas Observados">
+                    </div>
+                </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="diagnostico" #diagnostico="ngModel"[(ngModel)]="intervencionService.s.diagnostico " placeholder="Diagnostico Observado">
+                    </div>
+                 </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="notas" #notas="ngModel"[(ngModel)]="intervencionService.s.notas" placeholder="Notas del paciente">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="tratamiento" #tratamiento="ngModel"[(ngModel)]="intervencionService.s.tratamiento" placeholder="Tratamiento asignado">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <button class="btn btn-outline-success" (click)="guardar(fo);" >Guardar Consulta</button>
+                      <button class="btn btn-outline-danger" (click)="rF();" >Cancelar </button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+</div>
