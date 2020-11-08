@@ -17,45 +17,48 @@ import { abort } from 'process';
 export class IntervencionComponent implements OnInit {
 
   dato: any;
+  personas : Persona[];
   constructor(public intervencionService:IntervencionService) { }
   
 
   ngOnInit(): void {
 
-    console.log('Iniciando Intervencion');
+    
     this.getPer();
   }
 
-  guardar(fo?:NgForm){
-
+  //Guardar la consulta
+  guardar(fo?:NgForm):boolean{
+    var ab =false;
     
-    
-    console.log(fo.value);
-    this.intervencionService.postColor(fo.value)
+    this.intervencionService.postIntervencion(fo.value)
       .subscribe(res=>{
-        console.log(res);
-        
-        
         this.act(this.dato);
-        
-      })
-    
-  }
+        ab = true;
+      });
 
-  rF(){
+      return ab;
+  }
+//Reiniciar formulario
+  rF() : boolean {
+
     this.vis2();
-
+    return true;
   }
-
-  getPer(){
+  
+//Consulta las personas para atender en el día
+  getPer() : string {
+    const res="";
     this.intervencionService.getPersona()
       .subscribe(res=>{
-      this.intervencionService.colors= res as Persona[];
-      console.log(res);
+      this.intervencionService.colors = res as Persona[];
+      this.personas = res as Persona[];
     }) 
+    return res;
   }
 
-  editColor(color:any){
+  //Edita el estado del paciente atendido
+  editColor(color:any):boolean{
     color.status='no';
     
     var da=document.getElementById("nombre") ;
@@ -65,27 +68,30 @@ export class IntervencionComponent implements OnInit {
     color.status='no';
      this.dato = color;
      
-
+    return true;
   }
-
-  act(color:Persona){
-
+//Actualiza el registro con la api
+  act(color:any):boolean{
+    var ab=false;
     this.intervencionService.putPersona(color)
       .subscribe(res=>{
-        
+      
       console.log(res);
       window.location.reload();
+      ab= true;  
     });
+    return ab;
   }
 
-  vis(){
+  vis() :boolean {
     var intro = document.getElementById('form');
     intro.style.display = 'block';
     
     var intro1 = document.getElementById('form1');
     intro1.style.display = 'none';
-    
+    return true;
   }
+
   vis2(){
     var intro = document.getElementById('form');
     intro.style.display = 'none';

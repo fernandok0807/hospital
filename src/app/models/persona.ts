@@ -1,4 +1,4 @@
-export class Persona {
+export  class Persona {
 
     constructor( _id='',  nombre='',apellido='',telefono='',fecha='',hora='',status=''){
         this._id=_id;

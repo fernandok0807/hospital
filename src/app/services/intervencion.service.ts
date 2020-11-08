@@ -18,18 +18,19 @@ export class IntervencionService {
 
   }
 
-
-  postColor(Color:Intervencion){
-    return this.http.post(this.URL+'notas',Color);
-  }
-
+//Consume la api para ver las personas que debe atender en el día
   getPersona(){
     return this.http.get(this.URL+'persona/si');
   }
 
+// Agrega un registro de atencion al paciente
+  postIntervencion(intervencion:Intervencion){
+    return this.http.post(this.URL+'notas',intervencion);
+  }
+
+  // Actaliza la el registro de la persona que ya se atendio
   putPersona(Info:Persona){
     return this.http.put(this.URL+'persona/'+Info._id,Info);
-
   }
 
 }
